@@ -37,7 +37,7 @@ collect_addtool_01:
         jsonpath: $.data.id
         # 自定义的缓存名称
         name: yushaoqi_sql
-    sql:
+    sql: []
     teardown:
       - case_id: collect_delete_tool_01
         send_request:

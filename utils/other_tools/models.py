@@ -99,8 +99,8 @@ class Assert(BaseModel):
 class DependentData(BaseModel):
     dependent_type: Text
     jsonpath: Text
-    set_cache: Optional[Text]
-    replace_key: Optional[Text]
+    set_cache: Optional[Text]  = None
+    replace_key: Optional[Text] = None
 
 
 class DependentCaseData(BaseModel):
@@ -117,16 +117,16 @@ class ParamPrepare(BaseModel):
 
 class SendRequest(BaseModel):
     dependent_type: Text
-    jsonpath: Optional[Text]
-    cache_data: Optional[Text]
-    set_cache: Optional[Text]
+    jsonpath: Optional[Text] = None
+    cache_data: Optional[Text] = None
+    set_cache: Optional[Text] = None
     replace_key: Optional[Text]
 
 
 class TearDown(BaseModel):
     case_id: Text
-    param_prepare: Optional[List["ParamPrepare"]]
-    send_request: Optional[List["SendRequest"]]
+    param_prepare: Optional[List["ParamPrepare"]] = None
+    send_request: Optional[List["SendRequest"]] = None
 
 
 class CurrentRequestSetCache(BaseModel):
@@ -147,8 +147,8 @@ class TestCase(BaseModel):
     data: Any = None
     dependence_case: Union[None, bool] = False
     dependence_case_data: Optional[Union[None, List["DependentCaseData"], Text]] = None
-    sql: List = None
-    setup_sql: List = None
+    sql: Optional[list] = None
+    setup_sql: Optional[list] = None
     status_code: Optional[int] = None
     teardown_sql: Optional[List] = None
     teardown: Union[List["TearDown"], None] = None
@@ -170,7 +170,7 @@ class ResponseData(BaseModel):
     assert_data: Dict
     res_time: Union[int, float]
     status_code: int
-    teardown: List["TearDown"] = None
+    teardown: Union[List["TearDown"], None] = None
     teardown_sql: Union[None, List]
     body: Any
 

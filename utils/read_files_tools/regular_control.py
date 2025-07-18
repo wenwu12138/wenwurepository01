@@ -101,6 +101,12 @@ class Context:
         return config.host
 
     @classmethod
+    def athena_designer_host(cls) -> str:
+        from utils import config
+        """ 获取设计器接口域名 """
+        return config.athena_designer_host
+
+    @classmethod
     def app_host(cls) -> str:
         from utils import config
         """获取app的host"""

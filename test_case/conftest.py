@@ -14,6 +14,7 @@ from utils.other_tools.models import TestCase
 from utils.read_files_tools.clean_files import del_file
 from utils.other_tools.allure_data.allure_tools import allure_step, allure_step_no
 from utils.cache_process.cache_control import CacheHandler
+from datetime import datetime
 
 
 @pytest.fixture(scope="session", autouse=False)
@@ -31,7 +32,7 @@ def work_login_init():
 
     url = "https://www.wanandroid.com/user/login"
     data = {
-        "username": 18800000001,
+        "username": "wenwu",
         "password": 123456
     }
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -105,13 +106,16 @@ def pytest_terminal_summary(terminalreporter):
     """
     收集测试结果
     """
+    session_start = terminalreporter._session_start
+    session_start_timestamp = time.mktime(session_start.timetuple()) if isinstance(session_start, datetime) else 0
+
 
     _PASSED = len([i for i in terminalreporter.stats.get('passed', []) if i.when != 'teardown'])
     _ERROR = len([i for i in terminalreporter.stats.get('error', []) if i.when != 'teardown'])
     _FAILED = len([i for i in terminalreporter.stats.get('failed', []) if i.when != 'teardown'])
     _SKIPPED = len([i for i in terminalreporter.stats.get('skipped', []) if i.when != 'teardown'])
     _TOTAL = terminalreporter._numcollected
-    _TIMES = time.time() - terminalreporter._sessionstarttime
+    _TIMES = time.time() - session_start_timestamp     # 不太对啊 先放着 不报错~
     INFO.logger.error(f"用例总数: {_TOTAL}")
     INFO.logger.error(f"异常用例数: {_ERROR}")
     ERROR.logger.error(f"失败用例数: {_FAILED}")
