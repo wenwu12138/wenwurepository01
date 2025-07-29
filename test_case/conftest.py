@@ -48,6 +48,8 @@ def work_login_init():
         cookies += _cookie
         # 将登录接口中的cookie写入缓存中，其中login_cookie是缓存名称
     CacheHandler.update_cache(cache_name='login_cookie', value=cookies)
+    CacheHandler.update_cache(cache_name='token', value='e3478ac5-e4e2-4403-8cd8-143d7a9a780e')
+
 
 
 def pytest_collection_modifyitems(items):

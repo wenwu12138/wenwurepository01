@@ -1,0 +1,38 @@
+# 公共参数
+case_common:
+  allureEpic: 开发平台接口
+  allureFeature: 分支
+  allureStory: 新建分支接口
+
+branch_addbranch001:
+  host: ${{athena_designer_host()}}
+  url: /athena-designer/multiBranch/createNewBranch
+  method: POST
+  detail: 新增条件分支接口
+  headers:
+    digi-middleware-auth-user: $cache{token}    #cookie: $cache{login_cookie}
+  requestType: json
+  is_run: true
+  data:
+    targetBranch: bak
+    sourceBranch: develop
+    lang:
+      title:
+        zh_CN: c001
+        zh_TW: c001
+        en_US: c001
+      description:
+        zh_CN: "2025728"
+        zh_TW: "2025728"
+        en_US: "2025728"
+    application: Aca83c666eAT
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+  assert:
+    code:
+      jsonpath: $.code
+      type: ==
+      value: 0
+      AssertType:

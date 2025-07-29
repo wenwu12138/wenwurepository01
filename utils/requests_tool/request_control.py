@@ -264,7 +264,6 @@ class RequestControl:
             headers=_headers,
             verify=False,
             **kwargs)
-
         return res
 
     @classmethod
